@@ -22,7 +22,7 @@ Arguments: <br><br>
                  
        Possible values- 'drop' (default), 'mode' and 'mean'
 
-Returns: <br><br>Dataframe without missing values.
+Returns: <br><br>*Dataframe without missing values.*
 
 <br>
 
@@ -46,7 +46,7 @@ Arguments: <br><br>
                  
        Possible values- True for dropping dummy variable, otherwise False
 
-Returns: <br><br>Dataframe with all numerical columns.
+Returns: <br><br>*Dataframe with all numerical columns.*
 
 
 3) **remOutliers()** - Remove outliers from the dataset using number of standard deviations (z-score).
@@ -63,7 +63,7 @@ Arguments: <br><br>
                  
        Default - 3
 
-Returns: <br><br>Dataframe without outliers.
+Returns: <br><br>*Dataframe without outliers.*
 
 
 
