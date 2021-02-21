@@ -145,7 +145,10 @@ Arguments: <br><br>
                  
        Possible values- 'c' for classification (default) and 'r' for regression
                  
-Prints: <br><br> Prints the accuracy value for classification and MSE score for regression.
+Prints: <br><br> *Prints the accuracy value for classification and MSE score for regression.*
+
+### Main Functions:
+
 
 
 
