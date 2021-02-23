@@ -271,6 +271,10 @@ Arguments are identical to trainPipeline().
 Returns: <br><br>4 Dataframes - <br> *X_train,X_test,y_train,y_test*
 
 
+##### Copyright (c) 2021 Karan-Malik
+
+
+
 
 
 
