@@ -149,6 +149,93 @@ Prints: <br><br> *Prints the accuracy value for classification and MSE score for
 
 ### Main Functions:
 
+#### 1) **trainPipeline()** - Main function to run the complete data preprocessing and model training pipeline. Automatically replace missing values, encode categorical features, remove outliers, scale values, split the dataset and train the model.
+
+
+```Python
+def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
+                      dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                      scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model')
+
+```
+
+Arguments: <br><br>
+*dataframe* - the pandas dataframe to be used for processing
+
+*features* - list of columns in the dataframe to be used as features
+
+*target* - name of target column (string)
+
+*na_method*- method used to deal with the missing values.
+                 
+       Possible values- 'drop' (default), 'mode' and 'mean'
+
+*ohe* - Method used for converting categorical columns
+                 
+       Possible values- True for one hot encoding, False for label encoding
+
+
+*dropFirst* - Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True.
+                 
+       Possible values- True for dropping dummy variable, otherwise False
+
+*rem_outliers* -  whether outliers are to be removed
+                 
+       Possible values- True for removing outliers (Default), otherwise False
+
+*n_std*- The number of standard deviations upto which the values are to be kept
+                 
+       Default - 3
+
+*scale_vals* -  whether values are to be scaled or not
+                 
+       Possible values- True for scaling (Default), False for no scaling
+
+*scale_list*- list of all columns to be scaled. Default: all columns.
+ 
+*scale_type*- Method used for scaling
+                 
+       Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling
+
+*test_split* - Ratio of test set to the the total data. Default: 0.2
+
+*folds* - number of folds for k-fold cross validation. Default: 5
+
+*task_type* - type of task to be carried out by the random forest model.
+                 
+       Possible values- 'c' for classification (default) and 'r' for regression
+
+*model_name* - name of the model pkl file to be saved. Default: 'model'
+
+Returns: <br><br>
+*model* - sklearn model (Random Forest) trained on the given dataset.
+*X* - Preprocessed dataframe used to train model
+*y* - target vector
+
+
+#### 2) **predictPipeline()** - Main function to run the complete prediction pipeline using the model trained with the trainPipeline() function. The trainPipeline() function must be executed before using the predictPipeline().
+
+
+```Python
+def predictPipeline(dataframe,features,na_method='drop',ohe=True,
+                      dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                      scale_list=None,scale_type='std',model_name='model'):
+
+```
+**Arguments for predictPipeline() must be identical to trainPipeline() to ensure that the processed dataframes are identical in both cases.** <br><br> 
+Arguments: <br><br>
+*dataframe* - the pandas dataframe to be used for predictions
+
+*features* - list of columns in the dataframe to be used as features
+
+*model_name* - name of the model saved in the trainPipeline().
+
+** Remaining arguments are identical to trainPipeline().**
+
+Returns: <br><br>
+*pred* - array of predictions made using the given dataframe and model.
+
+
 
 
 
