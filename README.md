@@ -1,4 +1,4 @@
-# prepdata
+# PrepData
 [![pypiversion](https://img.shields.io/pypi/v/prepdata)](https://pypi.org/project/prepdata/)
 [![issues](https://img.shields.io/github/issues/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/issues)
 [![forks](https://img.shields.io/github/forks/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/network/members)
@@ -9,11 +9,13 @@
 Glide through the most repetitive part of Data Science, preprocessing the dataframes with [prepdata](https://pypi.org/project/prepdata/). This library lets you train your Machine Learning models without worrying about the imperfections of the underlying dataset. 
 
 ## Features
-- Removing missing values
-- Removing outliers
-- Encoding categorical variables
-- Splitting the dataset
-- Training your model automatically with the comprehensive functions of this library. 
+Use a single comprehensive function to automatically:
+- Remove missing values
+- Remove outliers
+- Encode categorical variables
+- Scale values
+- Split the dataset
+- Train your model  
 
 ## Table Of Contents
 
@@ -35,16 +37,44 @@ Glide through the most repetitive part of Data Science, preprocessing the datafr
 
 
 #### Install the library from Pypi [here](https://pypi.org/project/PrepData/)
+
 ## Sample Code
 
-![sample_code](https://github.com/Karan-Malik/prepdata/blob/master/sample.PNG?raw=true)
+```Python
+from PrepData import prepDF
 
+
+#importing data
+dataframe=pd.read_csv('Churn_Modelling.csv')
+
+#defining features and target column
+target_column='Exited'
+features=list(set(dataframe.columns) - set(['RowNumber','CustomerId','Surname','Exited']))
+
+#list of columns to be scaled
+scale_list=['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts','EstimatedSalary']
+
+#using the main library functions
+#the subfunctions documented below are to be used similarly
+
+# 1) trainPipeline() 
+model,X,Y=prepDF.trainPipeline(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
+
+# 2) predictPipeline()
+pred=prepDF.predictPipeline(dataframe, features,dropFirst=True,scale_list=scale_list)
+
+# 3) processDF()
+a,b=prepDF.processDf(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
+
+# 4) processAndSplit()
+x_tr,x_te,y_tr,y_te=prepDF.processAndSplit(dataframe, features, target_column,scale_list=scale_list,dropFirst=True)
+```
 ## Documentation
 
 The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the available functions have been documented below.
 
 ### Main Functions
-These are the main function which with the help of sub functions process the data and help ease the tasks
+These are the main function which with the help of the sub functions process the data and help ease the tasks
 
 #### trainPipeline()
 
@@ -157,7 +187,7 @@ These are the main function which with the help of sub functions process the dat
   ```
 
 ### Sub Functions
-These are the functions used inside the main functions and are not necessary for use unless actually required
+These are the functions used inside the main functions
 
 #### missingVals()
 
