@@ -19,17 +19,20 @@ Glide through the most repetitive part of Data Science, preprocessing the datafr
 
 * [Sample Code](#sample-code)
 * [Documentation](#documentation)
-  + [missingVals()](#missingvals)
-  + [catEncoding()](#catencoding)
-  + [remOutliers()](#remoutliers)
-  + [scaleVals()](#scalevals)
-  + [testSplit()](#testsplit)
-  + [splitAndTrain()](#splitandtrain)
-  + [predScore()](#predscore)
-  + [trainPipeline()](#trainpipeline)
-  + [predictPipeline()](#predictpipeline)
-  + [processDf()](#processdf)
-  + [processAndSplit()](#processandsplit)
+  + [Main Functions](#main-functions)
+    - [trainPipeline()](#trainpipeline)
+    - [predictPipeline()](#predictpipeline)
+    - [processDf()](#processdf)
+    - [processAndSplit()](#processandsplit)
+  + [Sub Functions](#sub-functions)
+    - [missingVals()](#missingvals)
+    - [catEncoding()](#catencoding)
+    - [remOutliers()](#remoutliers)
+    - [scaleVals()](#scalevals)
+    - [testSplit()](#testsplit)
+    - [splitAndTrain()](#splitandtrain)
+    - [predScore()](#predscore)
+
 
 ## Sample Code
 
@@ -38,6 +41,119 @@ Glide through the most repetitive part of Data Science, preprocessing the datafr
 ## Documentation
 
 The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the available functions have been documented below.
+
+### Main Functions
+These are the main function which with the help of sub functions process the data and help ease the tasks
+
+#### trainPipeline()
+
+  ```python
+  def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
+                        dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                        scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model'):
+    """
+    Main function to run the complete data preprocessing and model training pipeline. Automatically replace missing values, encode categorical features, remove outliers, scale values, split the dataset and train the model.
+
+    Parameters: 
+    dataframe - the pandas dataframe to be used for processing (pandas.DataFrame)
+    features - list of columns in the dataframe to be used as features (list)
+    target - name of target column (string)
+    na_method- method used to deal with the missing values (string).
+      [ Possible values- 'drop' (default), 'mode' and 'mean' ]
+    ohe - Method used for converting categorical columns (Boolean)
+      [ Possible values- True for one hot encoding, False for label encoding ]
+    dropFirst - Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True (Boolean).
+      [ Possible values- True for dropping dummy variable, otherwise False ]
+    rem_outliers -  whether outliers are to be removed (Boolean)
+      [ Possible values- True for removing outliers (Default), otherwise False ]
+    n_std- The number of standard deviations upto which the values are to be kept (int)
+      [ Default - 3 ]
+    scale_vals -  whether values are to be scaled or not (Boolean)
+      [ Possible values- True for scaling (Default), False for no scaling ]
+    scale_list- list of all columns to be scaled. Default: all columns (list).
+    scale_type- Method used for scaling (string)
+      [ Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling ]
+    test_split - Ratio of test set to the the total data (float). Default: 0.2
+    folds - number of folds for k-fold cross validation (int). Default: 5
+    task_type - type of task to be carried out by the random forest model (string).
+      [ Possible values- 'c' for classification (default) and 'r' for regression ]
+    model_name - name of the model pkl file to be saved (string). Default: 'model'
+
+    Returns: 
+    model - sklearn model (Random Forest) trained on the given dataset.
+    X - Preprocessed dataframe used to train model
+    y - target vector
+    """
+  ```
+
+#### predictPipeline()
+
+  ```python
+  def predictPipeline(dataframe,features,na_method='drop',ohe=True,
+                        dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                        scale_list=None,scale_type='std',model_name='model'):
+    """
+    Main function to run the complete prediction pipeline using the model trained with the trainPipeline() function. The trainPipeline() function must be executed before using the predictPipeline().
+
+    Arguments for predictPipeline() must be identical to trainPipeline() to ensure that the processed dataframes are identical in both cases.  
+
+    Parameters: 
+    dataframe - the pandas dataframe to be used for predictions (pandas.DataFrame)
+    features - list of columns in the dataframe to be used as features (list)
+    model_name - name of the model saved in the trainPipeline() (string).
+    ohe - Method used for converting categorical columns (Boolean)
+      [ Possible values- True for one hot encoding, False for label encoding ]
+    dropFirst - Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True (Boolean).
+      [ Possible values- True for dropping dummy variable, otherwise False ]
+    rem_outliers -  whether outliers are to be removed (Boolean)
+      [ Possible values- True for removing outliers (Default), otherwise False ]
+    n_std- The number of standard deviations upto which the values are to be kept (int)
+      [ Default - 3 ]
+    scale_vals -  whether values are to be scaled or not (Boolean)
+      [ Possible values- True for scaling (Default), False for no scaling ]
+    scale_list- list of all columns to be scaled. Default: all columns (list).
+    scale_type- Method used for scaling (string)
+      [ Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling ]
+
+    Returns: 
+    pred - array of predictions made using the given dataframe and model.
+    """
+  ```
+
+#### processDf()
+
+  ```python
+  def processDf(dataframe,features,target,na_method='drop',ohe=True,
+                    dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                    scale_list=None,scale_type='std'):
+    """
+    Function to preprocess the dataframe. Similar to trainPipeline() except no model is trained and returned. 
+
+    Parameters: 
+    Arguments are identical to trainPipeline().
+
+    Returns: 
+    X - Preprocessed dataframe for model training
+    y - target vector
+    """
+  ```
+
+#### processAndSplit()
+
+  ```python
+  def processAndSplit(dataframe,features,target,na_method='drop',ohe=True,
+                    dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                    scale_list=None,scale_type='std',test_split=0.2):
+    """
+    Function to preprocess the dataframe and split into train and test set. Similar to processDF() except the processed dataframe is split and returned. 
+
+    Parameters: 
+    Arguments are identical to trainPipeline().
+
+    Returns: 
+    4 Dataframes -  X_train,X_test,y_train,y_test
+    """
+  ```
 
 ### Sub Functions
 These are the functions used inside the main functions and are not necessary for use unless actually required
@@ -171,119 +287,6 @@ These are the functions used inside the main functions and are not necessary for
 
     Returns: 
     None
-    """
-  ```
-
-### Main Functions
-These are the main function which with the help of sub functions process the data and help ease the tasks
-
-#### trainPipeline()
-
-  ```python
-  def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
-                        dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
-                        scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model'):
-    """
-    Main function to run the complete data preprocessing and model training pipeline. Automatically replace missing values, encode categorical features, remove outliers, scale values, split the dataset and train the model.
-
-    Parameters: 
-    dataframe - the pandas dataframe to be used for processing (pandas.DataFrame)
-    features - list of columns in the dataframe to be used as features (list)
-    target - name of target column (string)
-    na_method- method used to deal with the missing values (string).
-      [ Possible values- 'drop' (default), 'mode' and 'mean' ]
-    ohe - Method used for converting categorical columns (Boolean)
-      [ Possible values- True for one hot encoding, False for label encoding ]
-    dropFirst - Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True (Boolean).
-      [ Possible values- True for dropping dummy variable, otherwise False ]
-    rem_outliers -  whether outliers are to be removed (Boolean)
-      [ Possible values- True for removing outliers (Default), otherwise False ]
-    n_std- The number of standard deviations upto which the values are to be kept (int)
-      [ Default - 3 ]
-    scale_vals -  whether values are to be scaled or not (Boolean)
-      [ Possible values- True for scaling (Default), False for no scaling ]
-    scale_list- list of all columns to be scaled. Default: all columns (list).
-    scale_type- Method used for scaling (string)
-      [ Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling ]
-    test_split - Ratio of test set to the the total data (float). Default: 0.2
-    folds - number of folds for k-fold cross validation (int). Default: 5
-    task_type - type of task to be carried out by the random forest model (string).
-      [ Possible values- 'c' for classification (default) and 'r' for regression ]
-    model_name - name of the model pkl file to be saved (string). Default: 'model'
-
-    Returns: 
-    model - sklearn model (Random Forest) trained on the given dataset.
-    X - Preprocessed dataframe used to train model
-    y - target vector
-    """
-  ```
-
-#### predictPipeline()
-
-  ```python
-  def predictPipeline(dataframe,features,na_method='drop',ohe=True,
-                        dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
-                        scale_list=None,scale_type='std',model_name='model'):
-    """
-    Main function to run the complete prediction pipeline using the model trained with the trainPipeline() function. The trainPipeline() function must be executed before using the predictPipeline().
-
-    Arguments for predictPipeline() must be identical to trainPipeline() to ensure that the processed dataframes are identical in both cases.  
-
-    Parameters: 
-    dataframe - the pandas dataframe to be used for predictions (pandas.DataFrame)
-    features - list of columns in the dataframe to be used as features (list)
-    model_name - name of the model saved in the trainPipeline() (string).
-    ohe - Method used for converting categorical columns (Boolean)
-      [ Possible values- True for one hot encoding, False for label encoding ]
-    dropFirst - Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True (Boolean).
-      [ Possible values- True for dropping dummy variable, otherwise False ]
-    rem_outliers -  whether outliers are to be removed (Boolean)
-      [ Possible values- True for removing outliers (Default), otherwise False ]
-    n_std- The number of standard deviations upto which the values are to be kept (int)
-      [ Default - 3 ]
-    scale_vals -  whether values are to be scaled or not (Boolean)
-      [ Possible values- True for scaling (Default), False for no scaling ]
-    scale_list- list of all columns to be scaled. Default: all columns (list).
-    scale_type- Method used for scaling (string)
-      [ Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling ]
-
-    Returns: 
-    pred - array of predictions made using the given dataframe and model.
-    """
-  ```
-
-#### processDf()
-
-  ```python
-  def processDf(dataframe,features,target,na_method='drop',ohe=True,
-                    dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
-                    scale_list=None,scale_type='std'):
-    """
-    Function to preprocess the dataframe. Similar to trainPipeline() except no model is trained and returned. 
-
-    Parameters: 
-    Arguments are identical to trainPipeline().
-
-    Returns: 
-    X - Preprocessed dataframe for model training
-    y - target vector
-    """
-  ```
-
-#### processAndSplit()
-
-  ```python
-  def processAndSplit(dataframe,features,target,na_method='drop',ohe=True,
-                    dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
-                    scale_list=None,scale_type='std',test_split=0.2):
-    """
-    Function to preprocess the dataframe and split into train and test set. Similar to processDF() except the processed dataframe is split and returned. 
-
-    Parameters: 
-    Arguments are identical to trainPipeline().
-
-    Returns: 
-    4 Dataframes -  X_train,X_test,y_train,y_test
     """
   ```
 ---------------------------------------------------------------------------------------
