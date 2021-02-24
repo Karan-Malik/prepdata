@@ -23,23 +23,23 @@ Glide through the most repetitive part of Data Science, preprocessing the datafr
 
 The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the available functions have been documented below.
 
-### Sub-functions:
+### missingVals()
 
-#### 1) **missingVals()** - Remove or replace missing values from the dataset
+  ```python
+  def missingVals(df,na_method ='drop')
+  """
+    Remove or replace missing values from the dataset
 
+    Parameters:
+    df - dataframe to be used (pandas.DataFrame).
+    na_method- method used to deal with the missing values (string). 
+      [ Possible values- 'drop' (default), 'mode' and 'mean']
 
-```
-def missingVals(df,na_method ='drop')
-```
+    Returns:
+    pandas.DataFrame :Dataframe without missing values
+  """
+ ```
 
-Arguments: <br><br>
-*df*- dataframe to be used (pandas.DataFrame).
-
-*na_method*- method used to deal with the missing values (string).
-                 
-       Possible values- 'drop' (default), 'mode' and 'mean'
-
-Returns: <br><br>*Dataframe without missing values.*
 
 <br>
 
