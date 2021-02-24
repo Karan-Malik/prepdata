@@ -11,7 +11,7 @@ This is just a sample code describing how to use the functions of
 this library. The detailed documentation has been provided below this sample code
 '''
 
-import prepData
+from PrepData import prepDF
 
 
 #importing data
@@ -28,16 +28,16 @@ scale_list=['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts','Estimate
 #the subfunctions documented below are to be used similarly
 
 # 1) trainPipeline() 
-model,X,Y=prepData.trainPipeline(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
+model,X,Y=prepDF.trainPipeline(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
 
 # 2) predictPipeline()
-pred=prepData.predictPipeline(dataframe, features,dropFirst=True,scale_list=scale_list)
+pred=prepDF.predictPipeline(dataframe, features,dropFirst=True,scale_list=scale_list)
 
 # 3) processDF()
-a,b=prepData.processDf(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
+a,b=prepDF.processDf(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
 
 # 4) processAndSplit()
-x_tr,x_te,y_tr,y_te=prepData.processAndSplit(dataframe, features, target_column,scale_list=scale_list,dropFirst=True)
+x_tr,x_te,y_tr,y_te=prepDF.processAndSplit(dataframe, features, target_column,scale_list=scale_list,dropFirst=True)
 ```
 
 ## Documentation
