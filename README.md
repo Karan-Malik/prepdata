@@ -1,46 +1,15 @@
 # Automate Data Preprocessing for Data Science Projects
 Glide through the most repetitive part of Data Science, preprocessing the dataframes with [prepdata](https://github.com/Karan-Malik/prepdata). prepdata lets you train your Machine Learning models without worrying about the imperfections of the underlying dataset. Replace missing values, remove outliers, encode categorical variables, split the dataset and train your model automatically with the comprehensive functions of this library. 
 
-### https://pypi.org/project/PrepData/
+### https://github.com/Karan-Malik/prepdata
+
 
 ## Sample Code
 
-```Python
-'''
-This is just a sample code describing how to use the functions of
-this library. The detailed documentation has been provided below this sample code
-'''
-
-from PrepData import prepDF
-
-
-#importing data
-dataframe=pd.read_csv('Churn_Modelling.csv')
-
-#defining features and target column
-target_column='Exited'
-features=list(set(dataframe.columns) - set(['RowNumber','CustomerId','Surname','Exited']))
-
-#list of columns to be scaled
-scale_list=['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts','EstimatedSalary']
-
-#using the main library functions
-#the subfunctions documented below are to be used similarly
-
-# 1) trainPipeline() 
-model,X,Y=prepDF.trainPipeline(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
-
-# 2) predictPipeline()
-pred=prepDF.predictPipeline(dataframe, features,dropFirst=True,scale_list=scale_list)
-
-# 3) processDF()
-a,b=prepDF.processDf(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
-
-# 4) processAndSplit()
-x_tr,x_te,y_tr,y_te=prepDF.processAndSplit(dataframe, features, target_column,scale_list=scale_list,dropFirst=True)
-```
+![sample_code](https://github.com/Karan-Malik/prepdata/blob/master/sample.PNG?raw=true)
 
 ## Documentation
+
 The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the available functions have been documented below.
 
 ### Sub-functions:
@@ -48,7 +17,7 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
 #### 1) **missingVals()** - Remove or replace missing values from the dataset
 
 
-```Python
+```
 def missingVals(df,na_method ='drop')
 ```
 
@@ -67,7 +36,7 @@ Returns: <br><br>*Dataframe without missing values.*
 #### 2) **catEncoding()** - Converting categorical columns to numerical, using label encoding or one-hot encoding.
 
 
-```Python
+```
 def catEncoding(df,ohe=True,dropFirst=False)
 ```
 
@@ -89,7 +58,7 @@ Returns: <br><br>*Dataframe with all numerical columns.*
 #### 3) **remOutliers()** - Remove outliers from the dataset using number of standard deviations (z-score).
 
 
-```Python
+```
 def remOutliers(df,n_std=3)
 ```
 
@@ -105,7 +74,7 @@ Returns: <br><br>*Dataframe without outliers.*
 #### 4) **scaleVals()** - Scale the values present in the dataset
 
 
-```Python
+```
 def scaleVals(df,scale_list=None,scale_type='std')
 ```
 
@@ -123,7 +92,7 @@ Returns: <br><br>*Dataframe with scaled values.*
 #### 5) **testSplit()** - Split the dataset into training and test set
 
 
-```Python
+```
 def testSplit(X,y,test_split=0.2)
 ```
 
@@ -140,7 +109,7 @@ Returns: <br><br>4 Dataframes - <br> *X_train,X_test,y_train,y_test*
 #### 6) **splitAndTrain()** - Split the dataset into train and test test, train a random forest model on the training set and save the model as a pickle file.
 
 
-```Python
+```
 def splitAndTrain(X,y,test_split=0.2,folds=5,task_type='c',model_name='model')
 ```
 
@@ -169,7 +138,7 @@ Returns: <br><br>
 #### 7) **predScore()** - Score the models predictions
 
 
-```Python
+```
 def predScore(y_true,y_pred,task_type='c'):
 ```
 
@@ -189,7 +158,7 @@ Prints: <br><br> *Prints the accuracy value for classification and MSE score for
 #### 1) **trainPipeline()** - Main function to run the complete data preprocessing and model training pipeline. Automatically replace missing values, encode categorical features, remove outliers, scale values, split the dataset and train the model.
 
 
-```Python
+```
 def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
                       dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
                       scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model')
@@ -255,7 +224,7 @@ Returns: <br><br>
 #### 2) **predictPipeline()** - Main function to run the complete prediction pipeline using the model trained with the trainPipeline() function. The trainPipeline() function must be executed before using the predictPipeline().
 
 
-```Python
+```
 def predictPipeline(dataframe,features,na_method='drop',ohe=True,
                       dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
                       scale_list=None,scale_type='std',model_name='model'):
@@ -277,7 +246,7 @@ Returns: <br><br>
 #### 3) **processDf()** - Function to preprocess the dataframe. Similar to trainPipeline() except no model is trained and returned. 
 
 
-```Python
+```
 def processDf(dataframe,features,target,na_method='drop',ohe=True,
                   dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
                   scale_list=None,scale_type='std')
@@ -295,7 +264,7 @@ Returns: <br><br>
 #### 4) **processAndSplit()** - Function to preprocess the dataframe and split into train and test set. Similar to processDF() except the processed dataframe is split and returned. 
 
 
-```Python
+```
 def processAndSplit(dataframe,features,target,na_method='drop',ohe=True,
                   dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
                   scale_list=None,scale_type='std',test_split=0.2):
@@ -310,6 +279,8 @@ Returns: <br><br>4 Dataframes - <br> *X_train,X_test,y_train,y_test*
 ---------------------------------------------------------------------------------------
 
 ##### Copyright (c) 2021 Karan-Malik
+
+
 
 
 

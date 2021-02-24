@@ -1,10 +1,165 @@
-Metadata-Version: 1.0
-Name: prepdata
-Version: 0.1.0
+Metadata-Version: 2.1
+Name: PrepData
+Version: 0.1.8
 Summary: Automating the process of Data Preprocessing for Data Science
-Home-page: UNKNOWN
+Home-page: https://github.com/Karan-Malik/prepdata
 Author: Karan Malik
-Author-email: UNKNOWN
+Author-email: karanmalik2000@gmail.com
 License: MIT
-Description: UNKNOWN
+Description: <h1>Automate Data Preprocessing for Data Science Projects</h1>
+        <p>Glide through the most repetitive part of Data Science, preprocessing the dataframes with <a href="https://github.com/Karan-Malik/prepdata">prepdata</a>. prepdata lets you train your Machine Learning models without worrying about the imperfections of the underlying dataset. Replace missing values, remove outliers, encode categorical variables, split the dataset and train your model automatically with the comprehensive functions of this library. </p>
+        <h3>https://github.com/Karan-Malik/prepdata</h3>
+        <h2>Sample Code</h2>
+        <p><img alt="sample_code" src="https://github.com/Karan-Malik/prepdata/blob/master/sample.PNG?raw=true" /></p>
+        <h2>Documentation</h2>
+        <p>The library works on <a href="https://pandas.pydata.org/">Pandas</a> dataframes. All the available functions have been documented below.</p>
+        <h3>Sub-functions:</h3>
+        <h4>1) <strong>missingVals()</strong> - Remove or replace missing values from the dataset</h4>
+        <p><code>def missingVals(df,na_method ='drop')</code></p>
+        <p>Arguments: <br><br>
+        <em>df</em>- dataframe to be used (pandas.DataFrame).</p>
+        <p><em>na_method</em>- method used to deal with the missing values (string).</p>
+        <pre><code>   Possible values- 'drop' (default), 'mode' and 'mean'
+        </code></pre>
+        <p>Returns: <br><br><em>Dataframe without missing values.</em></p>
+        <p><br></p>
+        <h4>2) <strong>catEncoding()</strong> - Converting categorical columns to numerical, using label encoding or one-hot encoding.</h4>
+        <p><code>def catEncoding(df,ohe=True,dropFirst=False)</code></p>
+        <p>Arguments: <br><br>
+        <em>df</em>- dataframe to be used (pandas.DataFrame).</p>
+        <p><em>ohe</em>- Method used for converting categorical columns (Boolean)</p>
+        <pre><code>   Possible values- True for one hot encoding, False for label encoding
+        </code></pre>
+        <p><em>dropFirst</em>- Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True (Boolean).</p>
+        <pre><code>   Possible values- True for dropping dummy variable, otherwise False
+        </code></pre>
+        <p>Returns: <br><br><em>Dataframe with all numerical columns.</em></p>
+        <h4>3) <strong>remOutliers()</strong> - Remove outliers from the dataset using number of standard deviations (z-score).</h4>
+        <p><code>def remOutliers(df,n_std=3)</code></p>
+        <p>Arguments: <br><br>
+        <em>df</em>- dataframe to be used (pandas.DataFrame).</p>
+        <p><em>n_std</em>- The number of standard deviations upto which the values are to be kept (float).</p>
+        <pre><code>   Default - 3.0
+        </code></pre>
+        <p>Returns: <br><br><em>Dataframe without outliers.</em></p>
+        <h4>4) <strong>scaleVals()</strong> - Scale the values present in the dataset</h4>
+        <p><code>def scaleVals(df,scale_list=None,scale_type='std')</code></p>
+        <p>Arguments: <br><br>
+        <em>df</em>- dataframe to be used (pandas.DataFrame).</p>
+        <p><em>scale_list</em>- list of all columns to be scaled. Default: all columns (list).</p>
+        <p><em>scale_type</em>- Method used for scaling (string)</p>
+        <pre><code>   Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling
+        </code></pre>
+        <p>Returns: <br><br><em>Dataframe with scaled values.</em></p>
+        <h4>5) <strong>testSplit()</strong> - Split the dataset into training and test set</h4>
+        <p><code>def testSplit(X,y,test_split=0.2)</code></p>
+        <p>Arguments: <br><br>
+        <em>X</em>- dataframe with all the features (pandas.DataFrame/ numpy.array).</p>
+        <p><em>y</em>- target column (pandas.DataFrame/ numpy.array). </p>
+        <p><em>test_split</em>- Ratio of test set to the the total data (float). Default: 0.2</p>
+        <p>Returns: <br><br>4 Dataframes - <br> <em>X_train,X_test,y_train,y_test</em></p>
+        <h4>6) <strong>splitAndTrain()</strong> - Split the dataset into train and test test, train a random forest model on the training set and save the model as a pickle file.</h4>
+        <p><code>def splitAndTrain(X,y,test_split=0.2,folds=5,task_type='c',model_name='model')</code></p>
+        <p>Arguments: <br><br>
+        <em>X</em> - dataframe with all the features (pandas.DataFrame/ numpy.array).</p>
+        <p><em>y</em> - target column (pandas.DataFrame/ numpy.array).</p>
+        <p><em>scale_list</em> - list of all columns to be scaled (list). Default: all columns.</p>
+        <p><em>test_split</em> - Ratio of test set to the the total data (float). Default: 0.2</p>
+        <p><em>folds</em> - number of folds for k-fold cross validation (int). Default: 5</p>
+        <p><em>task_type</em> - type of task to be carried out by the random forest model (string).</p>
+        <pre><code>   Possible values- 'c' for classification (default) and 'r' for regression
+        </code></pre>
+        <p><em>model_name</em> - name of the model pkl file to be saved (string). Default: 'model'</p>
+        <p>Returns: <br><br>
+        <em>score</em> - accuracy of the model trained. Accuracy for classification and R2 score for regression.
+        <em>model</em> - sklearn model (Random Forest) trained by the function on the given dataset.</p>
+        <h4>7) <strong>predScore()</strong> - Score the models predictions</h4>
+        <p><code>def predScore(y_true,y_pred,task_type='c'):</code></p>
+        <p>Arguments: <br><br>
+        <em>y_true</em>- Vector of actual labels from the test set (numpy.array)</p>
+        <p><em>y_pred</em>- Vector of predictions made by the model (numpy.array).</p>
+        <p><em>task_type</em> - type of task that was carried out (string).</p>
+        <pre><code>   Possible values- 'c' for classification (default) and 'r' for regression
+        </code></pre>
+        <p>Prints: <br><br> <em>Prints the accuracy value for classification and MSE score for regression.</em></p>
+        <h3>Main Functions:</h3>
+        <h4>1) <strong>trainPipeline()</strong> - Main function to run the complete data preprocessing and model training pipeline. Automatically replace missing values, encode categorical features, remove outliers, scale values, split the dataset and train the model.</h4>
+        <p>```
+        def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
+                              dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                              scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model')</p>
+        <p>```</p>
+        <p>Arguments: <br><br>
+        <em>dataframe</em> - the pandas dataframe to be used for processing (pandas.DataFrame)</p>
+        <p><em>features</em> - list of columns in the dataframe to be used as features (list)</p>
+        <p><em>target</em> - name of target column (string)</p>
+        <p><em>na_method</em>- method used to deal with the missing values (string).</p>
+        <pre><code>   Possible values- 'drop' (default), 'mode' and 'mean'
+        </code></pre>
+        <p><em>ohe</em> - Method used for converting categorical columns (Boolean)</p>
+        <pre><code>   Possible values- True for one hot encoding, False for label encoding
+        </code></pre>
+        <p><em>dropFirst</em> - Method to determine whether dummy variable is to be discarded or not. Valid only if ohe=True (Boolean).</p>
+        <pre><code>   Possible values- True for dropping dummy variable, otherwise False
+        </code></pre>
+        <p><em>rem_outliers</em> -  whether outliers are to be removed (Boolean)</p>
+        <pre><code>   Possible values- True for removing outliers (Default), otherwise False
+        </code></pre>
+        <p><em>n_std</em>- The number of standard deviations upto which the values are to be kept (int)</p>
+        <pre><code>   Default - 3
+        </code></pre>
+        <p><em>scale_vals</em> -  whether values are to be scaled or not (Boolean)</p>
+        <pre><code>   Possible values- True for scaling (Default), False for no scaling
+        </code></pre>
+        <p><em>scale_list</em>- list of all columns to be scaled. Default: all columns (list).</p>
+        <p><em>scale_type</em>- Method used for scaling (string)</p>
+        <pre><code>   Possible values- 'std' for standard scaling (default) and 'minmax' for min-max scaling
+        </code></pre>
+        <p><em>test_split</em> - Ratio of test set to the the total data (float). Default: 0.2</p>
+        <p><em>folds</em> - number of folds for k-fold cross validation (int). Default: 5</p>
+        <p><em>task_type</em> - type of task to be carried out by the random forest model (string).</p>
+        <pre><code>   Possible values- 'c' for classification (default) and 'r' for regression
+        </code></pre>
+        <p><em>model_name</em> - name of the model pkl file to be saved (string). Default: 'model'</p>
+        <p>Returns: <br><br>
+        <em>model</em> - sklearn model (Random Forest) trained on the given dataset.</p>
+        <p><em>X</em> - Preprocessed dataframe used to train model</p>
+        <p><em>y</em> - target vector</p>
+        <h4>2) <strong>predictPipeline()</strong> - Main function to run the complete prediction pipeline using the model trained with the trainPipeline() function. The trainPipeline() function must be executed before using the predictPipeline().</h4>
+        <p>```
+        def predictPipeline(dataframe,features,na_method='drop',ohe=True,
+                              dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                              scale_list=None,scale_type='std',model_name='model'):</p>
+        <p>```
+        <strong>Arguments for predictPipeline() must be identical to trainPipeline() to ensure that the processed dataframes are identical in both cases.</strong> <br><br> 
+        Arguments: <br><br>
+        <em>dataframe</em> - the pandas dataframe to be used for predictions (pandas.DataFrame)</p>
+        <p><em>features</em> - list of columns in the dataframe to be used as features (list)</p>
+        <p><em>model_name</em> - name of the model saved in the trainPipeline() (string).</p>
+        <p><strong> Remaining arguments are identical to trainPipeline().</strong></p>
+        <p>Returns: <br><br>
+        <em>pred</em> - array of predictions made using the given dataframe and model.</p>
+        <h4>3) <strong>processDf()</strong> - Function to preprocess the dataframe. Similar to trainPipeline() except no model is trained and returned.</h4>
+        <p>```
+        def processDf(dataframe,features,target,na_method='drop',ohe=True,
+                          dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                          scale_list=None,scale_type='std')</p>
+        <p>```</p>
+        <p>Arguments: <br><br>
+        Arguments are identical to trainPipeline().</p>
+        <p>Returns: <br><br>
+        <em>X</em> - Preprocessed dataframe for model training</p>
+        <p><em>y</em> - target vector</p>
+        <h4>4) <strong>processAndSplit()</strong> - Function to preprocess the dataframe and split into train and test set. Similar to processDF() except the processed dataframe is split and returned.</h4>
+        <p>```
+        def processAndSplit(dataframe,features,target,na_method='drop',ohe=True,
+                          dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
+                          scale_list=None,scale_type='std',test_split=0.2):</p>
+        <p>```</p>
+        <p>Arguments: <br><br>
+        Arguments are identical to trainPipeline().</p>
+        <p>Returns: <br><br>4 Dataframes - <br> <em>X_train,X_test,y_train,y_test</em></p>
+        <hr />
+        <h5>Copyright (c) 2021 Karan-Malik</h5>
 Platform: UNKNOWN
+Description-Content-Type: text/markdown
