@@ -1,9 +1,44 @@
 # Automate Data Preprocessing for Data Science Projects
 Glide through the most repetitive part of Data Science, preprocessing the dataframes with [prepdata](https://github.com/Karan-Malik/prepdata). prepdata lets you train your Machine Learning models without worrying about the imperfections of the underlying dataset. Replace missing values, remove outliers, encode categorical variables, split the dataset and train your model automatically with the comprehensive functions of this library. 
 
-### https://pypi.org/project/prepdata/0.1.0
+### https://pypi.org/project/prepdata/
 
-## Usage
+```Python
+'''
+This is just a sample code describing how to use the functions of
+this library. The detailed documentation has been provided below this sample code
+'''
+
+from prepdata import prepDF
+
+#importing data
+dataframe=pd.read_csv('Churn_Modelling.csv')
+
+#defining features and target column
+target_column='Exited'
+features=list(set(dataframe.columns) - set(['RowNumber','CustomerId','Surname','Exited']))
+
+#list of columns to be scaled
+scale_list=['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts','EstimatedSalary']
+
+#using the main library functions
+#the subfunctions documented below are to be used similarly
+
+# 1) trainPipeline() 
+model,X,Y=prepDF.trainPipeline(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
+
+# 2) predictPipeline()
+pred=prepDF.predictPipeline(dataframe, features,dropFirst=True,scale_list=scale_list)
+
+# 3) processDF()
+a,b=prepDF.processDf(dataframe,features,target_column,dropFirst=True,scale_list=scale_list)
+
+# 4) processAndSplit()
+x_tr,x_te,y_tr,y_te=prepDF.processAndSplit(dataframe, features, target_column,scale_list=scale_list,dropFirst=True)
+
+```
+
+## Documentation
 The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the available functions have been documented below.
 
 ### Sub-functions:
