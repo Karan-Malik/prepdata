@@ -1,4 +1,11 @@
-# Automate Data Preprocessing for Data Science Projects
+# prepdata
+[![pypiversion](https://img.shields.io/pypi/v/prepdata)](https://pypi.org/project/prepdata/)
+[![issues](https://img.shields.io/github/issues/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/issues)
+[![forks](https://img.shields.io/github/forks/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/network/members)
+[![stars](https://img.shields.io/github/stars/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/stargazers)
+
+*Automate Data Preprocessing for Data Science Projects*
+
 Glide through the most repetitive part of Data Science, preprocessing the dataframes with [prepdata](https://pypi.org/project/prepdata/). prepdata lets you train your Machine Learning models without worrying about the imperfections of the underlying dataset. Replace missing values, remove outliers, encode categorical variables, split the dataset and train your model automatically with the comprehensive functions of this library. 
 
 ## Sample Code
