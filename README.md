@@ -9,11 +9,27 @@
 Glide through the most repetitive part of Data Science, preprocessing the dataframes with [prepdata](https://pypi.org/project/prepdata/). This library lets you train your Machine Learning models without worrying about the imperfections of the underlying dataset. 
 
 ## Features
-- removing missing values
-- removing outliers
-- encoding categorical variables
-- splitting the dataset
-- training your model automatically with the comprehensive functions of this library. 
+- Removing missing values
+- Removing outliers
+- Encoding categorical variables
+- Splitting the dataset
+- Training your model automatically with the comprehensive functions of this library. 
+
+## Table Of Contents
+
+* [Sample Code](#sample-code)
+* [Documentation](#documentation)
+  + [missingVals()](#missingvals)
+  + [catEncoding()](#catencoding)
+  + [remOutliers()](#remoutliers)
+  + [scaleVals()](#scalevals)
+  + [testSplit()](#testsplit)
+  + [splitAndTrain()](#splitandtrain)
+  + [predScore()](#predscore)
+  + [trainPipeline()](#trainpipeline)
+  + [predictPipeline()](#predictpipeline)
+  + [processDf()](#processdf)
+  + [processAndSplit()](#processandsplit)
 
 ## Sample Code
 
@@ -23,10 +39,13 @@ Glide through the most repetitive part of Data Science, preprocessing the datafr
 
 The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the available functions have been documented below.
 
-### missingVals()
+### Sub Functions
+These are the functions used inside the main functions and are not necessary for use unless actually required
+
+#### missingVals()
 
   ```python
-  def missingVals(df,na_method ='drop')
+  def missingVals(df,na_method ='drop'):
     """
     Remove or replace missing values from the dataset
 
@@ -40,10 +59,10 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### catEncoding()
+#### catEncoding()
 
   ```python
-  def catEncoding(df,ohe=True,dropFirst=False)
+  def catEncoding(df,ohe=True,dropFirst=False):
     """
     Converting categorical columns to numerical, using label encoding or one-hot encoding.
     
@@ -59,10 +78,10 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### remOutliers()
+#### remOutliers()
 
   ```python
-  def remOutliers(df,n_std=3)
+  def remOutliers(df,n_std=3):
     """
     Remove outliers from the dataset using number of standard deviations (z-score).
 
@@ -76,10 +95,10 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### scaleVals()
+#### scaleVals()
 
   ```python
-  def scaleVals(df,scale_list=None,scale_type='std')
+  def scaleVals(df,scale_list=None,scale_type='std'):
     """
     Scale the values present in the dataset
 
@@ -94,10 +113,10 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### testSplit()
+#### testSplit()
 
   ```python
-  def testSplit(X,y,test_split=0.2)
+  def testSplit(X,y,test_split=0.2):
     """
     Split the dataset into training and test set
 
@@ -111,10 +130,10 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### splitAndTrain()
+#### splitAndTrain()
 
   ```python
-  def splitAndTrain(X,y,test_split=0.2,folds=5,task_type='c',model_name='model')
+  def splitAndTrain(X,y,test_split=0.2,folds=5,task_type='c',model_name='model'):
     """
     Split the dataset into train and test test, train a random forest model on the training set and save the model as a pickle file.
 
@@ -134,7 +153,7 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### predScore()
+#### predScore()
 
   ```python
   def predScore(y_true,y_pred,task_type='c'):
@@ -155,12 +174,15 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### trainPipeline()
+### Main Functions
+These are the main function which with the help of sub functions process the data and help ease the tasks
+
+#### trainPipeline()
 
   ```python
   def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
                         dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
-                        scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model')
+                        scale_list=None,scale_type='std',test_split=0.2,folds=5,model_name='model'):
     """
     Main function to run the complete data preprocessing and model training pipeline. Automatically replace missing values, encode categorical features, remove outliers, scale values, split the dataset and train the model.
 
@@ -196,7 +218,7 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### predictPipeline()
+#### predictPipeline()
 
   ```python
   def predictPipeline(dataframe,features,na_method='drop',ohe=True,
@@ -230,12 +252,12 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### processDf()
+#### processDf()
 
   ```python
   def processDf(dataframe,features,target,na_method='drop',ohe=True,
                     dropFirst=False,rem_outliers=True,n_std=3,scale_vals=True,
-                    scale_list=None,scale_type='std')
+                    scale_list=None,scale_type='std'):
     """
     Function to preprocess the dataframe. Similar to trainPipeline() except no model is trained and returned. 
 
@@ -248,7 +270,7 @@ The library works on [Pandas](https://pandas.pydata.org/) dataframes. All the av
     """
   ```
 
-### processAndSplit()
+#### processAndSplit()
 
   ```python
   def processAndSplit(dataframe,features,target,na_method='drop',ohe=True,
