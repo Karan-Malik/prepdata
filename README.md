@@ -320,6 +320,8 @@ These are the functions used inside the main functions
     None
     """
   ```
+
+#### In case of any suggestions or problems, feel free to open an [issue](https://github.com/Karan-Malik/prepdata/issues)
 ---------------------------------------------------------------------------------------
 
 *Copyright (c) 2021 Karan-Malik*
