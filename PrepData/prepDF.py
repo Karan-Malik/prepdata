@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Sat Feb 27 14:28:24 2021
+
+@author: karan
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Sat Feb 20 18:43:43 2021
 
 @author: karan
@@ -15,6 +22,14 @@ from sklearn.metrics import accuracy_score,mean_squared_error
 import scipy
 import pickle
 import os
+import nltk
+import re
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+ps=PorterStemmer()
+lm=WordNetLemmatizer()
+nltk.download('stopwords')
+s_words=set(stopwords.words('english'))
 
 #Class to implement the preprocessing pipeline
 
@@ -87,7 +102,7 @@ def scaleVals(df,scale_list=None,scale_type='std'):
     
     if scale_list==None:
         scale_list=list(df.columns)
-    
+
     if scale_type=='minmax':
         mm=MinMaxScaler()
         df[scale_list]=mm.fit_transform(df[scale_list])
@@ -143,6 +158,49 @@ def splitAndTrain(X,y,test_split=0.2,folds=5,task_type='c',model_name='model'):
         
 
 
+def prepText(df,col,na_method='drop',stopword=True,lemmatize=True,lem_method='l'):
+    
+    df=df.reset_index(drop=True)
+    if na_method=='drop':
+        null=[]
+        for i in range(len(df[col])):
+            if str(df[col][i])=='nan':
+                null.append(i)
+            
+        new_df=df.drop(null)
+    elif type(na_method)==str:
+        for i in range(len(df[col])):
+            if str(df[col][i])=='nan':
+                df[col][i]=na_method
+    
+    else:
+        raise Exception('argument na_method must be of type string')
+
+    df=df.reset_index(drop=True)    
+    corpus=[]
+    for i in range(len(df)):
+        
+        temp=re.sub('[^a-zA-Z0-9]',' ',df[col][i])
+        temp=temp.lower()
+        temp=temp.split()
+        
+        if stopword==True:
+            temp=[word for word in temp if word not in s_words]
+        if lemmatize==True:
+            if lem_method=='l':
+                temp=[lm.lemmatize(word) for word in temp]
+            elif lem_method=='s':
+                temp=[ps.stem(word) for word in temp]
+            else:
+                raise Exception('Invalid value for argument lem_method')
+        temp=[word for word in temp if len(word)>2]
+        temp=' '.join(temp)
+        
+        corpus.append(temp)
+        
+    return corpus
+
+
 # Main function to run the complete data preprocessing and model training pipeline
 # Args: dataframe - input dataframe
 #       features - list of columns in the dataframe to be used as features
@@ -168,7 +226,12 @@ def trainPipeline(dataframe,features,target,na_method='drop',ohe=True,
     if rem_outliers==True:
         df=remOutliers(df,n_std)
     if scale_vals==True:
-        df=scaleVals(df,scale_list,scale_type)
+        if scale_list==None:
+            scale_list2=list(df.columns)
+            scale_list2.remove(target)
+            df=scaleVals(df,scale_list2,scale_type)
+        else:
+            df=scaleVals(df,scale_list,scale_type)
     
     y=df[target]
     X=df.drop(target,axis=1)
@@ -240,9 +303,15 @@ def processDf(dataframe,features,target,na_method='drop',ohe=True,
     if rem_outliers==True:
         df=remOutliers(df,n_std)
     if scale_vals==True:
-        df=scaleVals(df,scale_list,scale_type)
-        y=df[target]
+        if scale_list==None:
+            scale_list2=list(df.columns)
+            scale_list2.remove(target)
+            df=scaleVals(df,scale_list2,scale_type)
+        else:
+            df=scaleVals(df,scale_list,scale_type)
+    y=df[target]
     X=df.drop(target,axis=1)
+    
     return X,y
 
 
@@ -258,7 +327,12 @@ def processAndSplit(dataframe,features,target,na_method='drop',ohe=True,
     if rem_outliers==True:
         df=remOutliers(df,n_std)
     if scale_vals==True:
-        df=scaleVals(df,scale_list,scale_type)
+        if scale_list==None:
+            scale_list2=list(df.columns)
+            scale_list2.remove(target)
+            df=scaleVals(df,scale_list2,scale_type)
+        else:
+            df=scaleVals(df,scale_list,scale_type)
     
     y=df[target]    
     X=df.drop(target,axis=1)
