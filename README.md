@@ -26,6 +26,7 @@ Use a single comprehensive function to automatically:
     - [predictPipeline()](#predictpipeline)
     - [processDf()](#processdf)
     - [processAndSplit()](#processandsplit)
+    - [prepText()](#preptext)
   + [Sub Functions](#sub-functions)
     - [missingVals()](#missingvals)
     - [catEncoding()](#catencoding)
@@ -183,6 +184,30 @@ These are the main function which with the help of the sub functions process the
 
     Returns: 
     4 Dataframes -  X_train,X_test,y_train,y_test
+    """
+  ```
+
+#### prepText()
+
+  ```python
+  def prepText(df,col,na_method='drop',stopword=True,lemmatize=True,lem_method='l')
+  """
+    Main function to preprocess text data.
+
+    Parameters: 
+    df - the pandas dataframe to be used (pandas.DataFrame)
+    col - column in the dataframe containing the text (string)
+    na_method- method used to deal with the missing values (string).
+      [ Possible values- 'drop' (default) or any other string to replace the missing value ]
+    stopword- whether stopwords are to be removed or not (Boolean).
+      [ Possible values- True for one hot encoding, False for label encoding ]
+    lemmatize- whether words are to be lemmatized/stemmed (Boolean).
+      [ Possible values- True (default), False ]
+    lm_method- method to be used for lemmatizing/stemming (string).
+      [ Possible values- 'l' for lemmatizing, 's' for stemming ]
+    
+    Returns: 
+    corpus - list containing the preprocessed text.
     """
   ```
 
