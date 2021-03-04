@@ -190,7 +190,8 @@ These are the main function which with the help of the sub functions process the
 #### prepText()
 
   ```python
-  def prepText(df,col,na_method='drop',stopword=True,lemmatize=True,lem_method='l')
+  def prepText(df,col,na_method='drop',stopword=True,lemmatize=True,lem_method='l'):
+  
   """
     Main function to preprocess text data.
 
