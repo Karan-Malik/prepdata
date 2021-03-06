@@ -16,7 +16,7 @@ Use a single comprehensive function to automatically:
 - Scale values
 - Split the dataset
 - Train your model  
-
+- Process text data
 ## Table Of Contents
 
 * [Sample Code](#sample-code)
