@@ -1,8 +1,10 @@
 # PrepData
 [![pypiversion](https://img.shields.io/pypi/v/prepdata)](https://pypi.org/project/prepdata/)
+[![pypiversion](https://img.shields.io/pypi/dm/prepdata)](https://img.shields.io/pypi/dm/prepdata)
 [![issues](https://img.shields.io/github/issues/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/issues)
 [![forks](https://img.shields.io/github/forks/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/network/members)
 [![stars](https://img.shields.io/github/stars/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/stargazers)
+
 
 *Automate Data Preprocessing for Data Science Projects*
 
