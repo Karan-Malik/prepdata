@@ -1,8 +1,7 @@
 # PrepData
 [![pypiversion](https://img.shields.io/pypi/v/prepdata)](https://pypi.org/project/prepdata/)
 [![Downloads](https://static.pepy.tech/personalized-badge/prepdata?period=total&units=international_system&left_color=grey&right_color=green&left_text=total%20downloads)](https://pepy.tech/project/prepdata)
-[![pypiversion](https://img.shields.io/pypi/dm/prepdata)](https://img.shields.io/pypi/dm/prepdata)
-[![issues](https://img.shields.io/github/issues/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/issues)
+[![Downloads](https://static.pepy.tech/personalized-badge/prepdata?period=month&units=international_system&left_color=grey&right_color=green&left_text=downloads/month)](https://pepy.tech/project/prepdata)[![issues](https://img.shields.io/github/issues/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/issues)
 [![forks](https://img.shields.io/github/forks/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/network/members)
 [![stars](https://img.shields.io/github/stars/Karan-Malik/prepdata)](https://github.com/Karan-Malik/prepdata/stargazers)
 
